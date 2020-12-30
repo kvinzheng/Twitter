@@ -1,0 +1,78 @@
+.spinner {
+  animation: spin infinite 5s linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.TweetFormProfileList-profiles {
+  position: absolute;
+  box-shadow: 0 4px 8px rgba(39, 51, 51, 0.24);
+  animation: fadeIn 0.15s cubic-bezier(0.4, 0, 0.7, 0.2);
+  background-color: #fff;
+  border-radius: 2px;
+  overflow-y: scroll;
+  max-height: 280px;
+  padding: 8px;
+  width: 520px;
+  border-top: dashed;
+  border-color: gray;
+  border-width: thin;
+}
+
+.TweetFormProfileList-network {
+  list-style: none;
+}
+
+.TweetFormProfileList-load{
+  text-align: center;
+  color: rgba(29, 161, 242, 1);
+}
+
+.TweetFormProfileList-item {
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.TweetFormProfileList-content-name {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: normal;
+  margin-right: 8px;
+  color: #364141;
+}
+.TweetFormProfileList-content-username {
+  color: #515e5f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: normal;
+  font-size: 13px;
+  font-weight: 400px;
+}
+
+.TweetFormProfileList-content {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.TweetFormProfileList-network {
+  list-style: none;
+}

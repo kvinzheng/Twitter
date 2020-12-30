@@ -1,0 +1,28 @@
+.TweetFormHeader-profile {
+  display: flex;
+  width: 100%;
+  min-height: 45px;
+  max-height: 125px;
+  overflow-y: auto;
+  border: solid #dee1e1;
+  border-width: 0 0 1px;
+  cursor: pointer;
+}
+.TweetFormHeader-profile-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.TweetFormHeader-profile-name {
+  margin: 0px 4px 0px 0px;
+  color: rgb(54, 65, 65);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.TweetFormHeader-profile-account {
+  margin: 0px 2px;
+  color: rgb(110, 121, 122);
+  font-size: 13px;
+  line-height: 21.3333px;
+}

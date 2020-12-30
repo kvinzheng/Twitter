@@ -1,0 +1,64 @@
+.LeftMenu {
+  display: inline-block;
+  width: 20%;
+  vertical-align: top;
+}
+
+.LeftMenu-Nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.LeftMenu_Nav-Link {
+  width: 100%;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 20px 4px 20px;
+  text-align: left;
+}
+
+.LeftMenu_Nav-Link,
+.LeftMenu_Nav-Link:hover {
+  text-decoration: none;
+}
+
+.LeftMenu_Nav-Link .LeftMenu-Twitter-Logo {
+  color: rgba(29, 161, 242, 1);
+  border-color: rgba(29, 161, 242, 1);
+}
+
+.active {
+  color: rgba(29, 161, 242, 1);
+}
+
+.LeftMenu-Link-Wrapper {
+  display: inline-flex;
+  border-radius: 50px;
+  align-items: center;
+  padding: 9px;
+}
+
+.LeftMenu-Link-Wrapper span {
+  padding: 0 12px 0 10px;
+}
+
+.LeftMenu_Nav-Link:hover .LeftMenu-NavGroup {
+  background: #cceeff;
+}
+
+.LeftMenu-TweetButton {
+  padding: 0px 25px;
+  border-radius: 50px;
+  color: white;
+  background-color: rgba(29, 161, 242, 1);
+  box-shadow:rgba(0, 0, 0, 0.08) 0px 8px 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 43px;
+}
+
+.LeftMenu-TweetButton:hover {
+  background-color: #0088cc;
+}

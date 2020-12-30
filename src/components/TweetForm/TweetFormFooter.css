@@ -1,0 +1,46 @@
+.TweetFormFooter-options {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.TweetFormFooter-warning {
+  color: red;
+  position: absolute;
+  right: 5px;
+}
+
+.TweetFormFooter-item {
+  cursor: pointer;
+  background-color: transparent;
+  height: 42px;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 16px;
+  white-space: nowrap;
+  font-weight: 700;
+  transition: all 0.15s linear 0s;
+  margin: 0px;
+  font-size: 13px;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  mix-blend-mode: multiply;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 50px;
+  color: rgb(54, 65, 65);
+}
+
+.TweetFormFooter-item:hover {
+  background-color: #d3d3d3;
+}
+
+.TweetFormFooter-remain-count {
+  float: right;
+}
