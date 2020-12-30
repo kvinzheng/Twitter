@@ -11,7 +11,7 @@ import {
 } from "react-feather";
 import "./index.css";
 
-export default function LeftMenu() {
+const LeftMenu = () => {
   return (
     <div className="LeftMenu">
       <div className="LeftMenu-Nav">
@@ -74,4 +74,6 @@ export default function LeftMenu() {
       </div>
     </div>
   );
-}
+};
+
+export default LeftMenu;

@@ -7,7 +7,7 @@ const CenterMenu = () => {
   return (
     <div className="CenterMenu">
       <div className="CenterMenu-title">
-        <span>Latest Tweets</span>
+        <span >Latest Tweets</span>
       </div>
       <TweetForm />
     </div>

@@ -16,6 +16,12 @@ const profile = (state = profileState, action) => {
     }
     case SEARCH_PROFILE_FULFILLED: {
       const { data, profile } = action.payload;
+      console.log('data',data)
+      console.log('stat here',{
+        ...state,
+        [profile]: data,
+        status: "FULFILLED",
+      })
       return {
         ...state,
         [profile]: data,

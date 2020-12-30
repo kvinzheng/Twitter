@@ -1,1 +1,1 @@
-export const profileState = {};
+export const profileState = { status: "" };

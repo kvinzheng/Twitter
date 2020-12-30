@@ -1,33 +1,50 @@
-import { setEvents, setEditableEvent, setZoomWidth } from "./events";
-import { SET_EVENTS, SET_EDITABLE_EVENT, SET_ZOOM_WIDTH } from "./type";
-import mockData from "../helpers/testingData";
+import { searchProfiles } from "./profile";
+import { profile } from "../helper/sample-data-test";
+import { SEARCH_PROFILE_PENDING } from "../actions/type";
+// Import all seed data to test
 
-describe("setEvents Tests", () => {
-  it("SUCCESS: setEvents test", () => {
-    const actual = {
-      type: SET_EVENTS,
-      payload: mockData.events.data,
+describe("searchProfiles Tests", () => {
+  it("SUCCESS: searchProfiles thunk test", () => {
+    const term = "sprout";
+    const thunk = searchProfiles(term);
+    expect(typeof thunk).toBe("function");
+    //mock the api
+    const tweetSearch = jest.fn();
+    tweetSearch.mockReturnValueOnce(Promise.resolve(profile));
+
+    const Api = {
+      tweetSearch,
     };
-    const expected = setEvents(mockData.events.data);
 
-    expect(actual).toEqual(expected);
+    const dispatch = jest.fn();
+    const getState = () => ({});
+
+    return thunk(dispatch, getState, { Api }).then(() => {
+      expect(Api.tweetSearch).toBeCalled();
+      dispatch.mockImplementationOnce(() => tweetSearch());
+      expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
+    });
   });
 
-  it("SUCCESS: setEditableEvent", () => {
-    const actual = {
-      type: SET_EDITABLE_EVENT,
-      payload: mockData.events.editableEvent,
-    };
-    const expected = setEditableEvent(mockData.events.editableEvent);
-    expect(actual).toEqual(expected);
-  });
+  it("FAILURE: searchProfiles thunk test", () => {
+    const term = "sprout";
+    const thunk = searchProfiles(term);
+    expect(typeof thunk).toBe("function");
+    //mock the api
+    const tweetSearch = jest.fn();
+    tweetSearch.mockReturnValueOnce(Promise.reject(new Error("network error")));
 
-  it("SUCCESS: setZoomWidth", () => {
-    const actual = {
-      type: SET_ZOOM_WIDTH,
-      payload: mockData.events.zoom.width,
+    const Api = {
+      tweetSearch,
     };
-    const expected = setZoomWidth(mockData.events.zoom.width);
-    expect(actual).toEqual(expected);
+
+    const dispatch = jest.fn();
+    const getState = () => ({});
+
+    return thunk(dispatch, getState, { Api }).then(() => {
+      expect(Api.tweetSearch).toBeCalled();
+      dispatch.mockImplementationOnce(() => tweetSearch());
+      expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
+    });
   });
 });

@@ -7,9 +7,9 @@ import CenterMenu from "../CenterMenu";
 function MainPage() {
   return (
     <div className="MainPage">
-          <LeftMenu />
-          <CenterMenu />
-          <RightMenu />
+      <LeftMenu />
+      <CenterMenu />
+      <RightMenu />
     </div>
   );
 }

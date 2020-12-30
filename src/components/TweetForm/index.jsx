@@ -1,34 +1,39 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import useDebounce from "../hook/useDebounce";
 import { searchProfiles } from "../../actions/profile";
-import { findCurrentWord } from "../../helper/wordFinder";
+import { findCurrentWord } from "../../helper/formHelper";
+
 import TweetFormHeader from "./TweetFormHeader";
 import TweetFormFooter from "./TweetFormFooter";
 import TweetFormProfileList from "./TweetFormProfileList";
+
+import { TEXT_AREA_COUNT, FETCH_DELAY_TIME } from "../../const/form";
 import "./index.css";
 
-const TweetForm = ({ profiles, searchProfiles, status }) => {
+export const TweetForm = ({ profiles, searchProfiles, status }) => {
+  // console.log('profiles',profiles)
   const [tweet, setTweet] = useState("");
   const [startIndex, setStartIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [outLine, setOutline] = useState(false);
   const [error, setError] = useState("");
-  const [countRemain, setCountRemain] = useState(280);
+  const [countRemain, setCountRemain] = useState(TEXT_AREA_COUNT);
 
   const textRef = useRef(null);
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  const debouncedSearchTerm = useDebounce(searchTerm, FETCH_DELAY_TIME);
 
   useEffect(() => {
     const existed = profiles[searchTerm.toLowerCase()];
-    if (debouncedSearchTerm && !existed) {
+    if (debouncedSearchTerm && !existed && searchTerm.length) {
       const fetchApi = async () => await searchProfiles(searchTerm);
       fetchApi();
     }
   }, [debouncedSearchTerm]);
 
-  const validateHelper = (newTweet, cursorPosition) => {
+  const validateTextArea = (newTweet, cursorPosition) => {
     const { startIndex, currentWord } = findCurrentWord(
       cursorPosition,
       newTweet
@@ -38,13 +43,19 @@ const TweetForm = ({ profiles, searchProfiles, status }) => {
     const searchTerm = currentWord.slice(index + 1);
     const firstTwoCharacters = searchTerm.slice(0, 2);
     const wordInValid = /[^0-9a-zA-Z]/.test(firstTwoCharacters);
-    const warning = wordInValid
+    const chatacterWarning = wordInValid
       ? "please editing an @ followed by 2 alphanumeric characters (a-z, 0-9)"
       : "";
-    const outBoundWarning = countRemain < 0 ? "Out of boundary" : "";
-    setError(outBoundWarning);
+    const outBoundWarning = "Out of boundary";
+
+    if (countRemain < 0) {
+      setError(outBoundWarning);
+    }
+    if (error.length && countRemain >= 0) {
+      setError("");
+    }
     if (currentWord.includes("@")) {
-      setError(warning);
+      setError(chatacterWarning);
       /* if word is more than 2 */
       if (searchTerm.length >= 2) {
         setStartIndex(startIndex);
@@ -60,8 +71,7 @@ const TweetForm = ({ profiles, searchProfiles, status }) => {
   const handleListItemClick = (profile) => {
     const left = tweet.slice(0, startIndex);
     const right = tweet.slice(startIndex + searchTerm.length + 1, tweet.length);
-    const newTweet = `${left}@${profile.replace(/ /g, '')}${right}`;
-    console.log('newTweet',newTweet)
+    const newTweet = `${left}@${profile.replace(/ /g, "")}${right}`;
     const focusWord = textRef.current;
     focusWord.value = newTweet;
 
@@ -73,9 +83,9 @@ const TweetForm = ({ profiles, searchProfiles, status }) => {
     const newTweet = e.target.value;
     const cursorPosition = e.target.selectionStart;
     setTweet(newTweet);
-    setCountRemain(280 - newTweet.length);
+    setCountRemain(TEXT_AREA_COUNT - newTweet.length);
 
-    validateHelper(newTweet, cursorPosition);
+    validateTextArea(newTweet, cursorPosition);
   };
 
   const handleOnKeyDown = async (e) => {
@@ -108,16 +118,25 @@ const TweetForm = ({ profiles, searchProfiles, status }) => {
           searchTerm={searchTerm}
           status={status}
         />
-      </div>s
+      </div>
     </div>
   );
 };
 
 export const mapStateToProps = (state) => {
+  // console.log('state',state)
   return {
     profiles: state.profile,
     status: state.profile.status,
   };
 };
 
-export default connect(mapStateToProps, { searchProfiles })(TweetForm);
+export const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      searchProfiles,
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(TweetForm);
