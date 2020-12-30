@@ -11,10 +11,12 @@ import TweetFormFooter from "./TweetFormFooter";
 import TweetFormProfileList from "./TweetFormProfileList";
 
 import { TEXT_AREA_COUNT, FETCH_DELAY_TIME } from "../../const/form";
+import PropTypes from "prop-types";
+
 import "./index.css";
 
-export const TweetForm = ({ profiles, searchProfiles, status }) => {
-  // console.log('profiles',profiles)
+export const TweetForm = ({ profileList, searchProfiles, status }) => {
+
   const [tweet, setTweet] = useState("");
   const [startIndex, setStartIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,8 +28,9 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
   const debouncedSearchTerm = useDebounce(searchTerm, FETCH_DELAY_TIME);
 
   useEffect(() => {
-    const existed = profiles[searchTerm.toLowerCase()];
+    const existed = profileList[searchTerm.toLowerCase()];
     if (debouncedSearchTerm && !existed && searchTerm.length) {
+      console.log('here')
       const fetchApi = async () => await searchProfiles(searchTerm);
       fetchApi();
     }
@@ -82,6 +85,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
   const handleOnChange = async (e) => {
     const newTweet = e.target.value;
     const cursorPosition = e.target.selectionStart;
+
     setTweet(newTweet);
     setCountRemain(TEXT_AREA_COUNT - newTweet.length);
 
@@ -89,7 +93,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
   };
 
   const handleOnKeyDown = async (e) => {
-    if (profiles[searchTerm] && e.key === " ") {
+    if (profileList[searchTerm] && e.key === " ") {
       setSearchTerm("");
     }
   };
@@ -103,7 +107,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
         <textarea
           className="TweetForm-textArea"
           ref={textRef}
-          onInput={handleOnChange}
+          onChange={handleOnChange}
           onKeyDown={handleOnKeyDown}
           onFocus={() => {
             setOutline(true);
@@ -114,7 +118,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
         <TweetFormFooter error={error} countRemain={countRemain} />
         <TweetFormProfileList
           onListItemClick={handleListItemClick}
-          profileList={profiles[searchTerm]}
+          profileList={profileList[searchTerm]}
           searchTerm={searchTerm}
           status={status}
         />
@@ -124,19 +128,18 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
 };
 
 export const mapStateToProps = (state) => {
-  // console.log('state',state)
   return {
-    profiles: state.profile,
+    profileList: state.profile.data,
     status: state.profile.status,
   };
 };
 
-export const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      searchProfiles,
-    },
-    dispatch
-  );
+export const mapDispatchToProps = (dispatch) => bindActionCreators({ searchProfiles}, dispatch );
+
+TweetForm.propTypes = {
+  profileList: PropTypes.array,
+  searchProfiles: PropTypes.func,
+  status: PropTypes.string
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TweetForm);

@@ -1,4 +1,4 @@
-.TweetFormHeader-profile {
+.TweetFormHeader{
   display: flex;
   width: 100%;
   min-height: 45px;
@@ -8,19 +8,19 @@
   border-width: 0 0 1px;
   cursor: pointer;
 }
-.TweetFormHeader-profile-detail {
+.TweetFormHeader-detail {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.TweetFormHeader-profile-name {
+.TweetFormHeader-name {
   margin: 0px 4px 0px 0px;
   color: rgb(54, 65, 65);
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;
 }
-.TweetFormHeader-profile-account {
+.TweetFormHeader-account {
   margin: 0px 2px;
   color: rgb(110, 121, 122);
   font-size: 13px;

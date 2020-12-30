@@ -1,5 +1,5 @@
 import { searchProfiles } from "./profile";
-import { profile } from "../helper/sample-data-test";
+import { profileApiData } from "../helper/sample-data-test";
 import { SEARCH_PROFILE_PENDING } from "../actions/type";
 // Import all seed data to test
 
@@ -10,7 +10,7 @@ describe("searchProfiles Tests", () => {
     expect(typeof thunk).toBe("function");
     //mock the api
     const tweetSearch = jest.fn();
-    tweetSearch.mockReturnValueOnce(Promise.resolve(profile));
+    tweetSearch.mockReturnValueOnce(Promise.resolve(profileApiData));
 
     const Api = {
       tweetSearch,

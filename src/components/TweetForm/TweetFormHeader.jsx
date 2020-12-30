@@ -5,16 +5,16 @@ import "./TweetFormHeader.css";
 
 const TweetFormHeader = () => {
   return (
-    <div className="TweetFormHeader-profile">
+    <div className="TweetFormHeader">
       <img src="https://pbs.twimg.com/profile_images/1186398821560897536/1Vp8_at4_normal.jpg" />
-      <div className="TweetFormHeader-profile-detail">
+      <div className="TweetFormHeader-detail">
         <Twitter
           size="20"
           fill="rgba(29,161,242,1.00)"
-          className="TweetFormHeader-profile-twitter-logo"
+          className="TweetFormHeader-twitter-logo"
         />
-        <span className="TweetFormHeader-profile-name">Your Name</span>
-        <span className="TweetFormHeader-profile-account">@yourname</span>
+        <span className="TweetFormHeader-name">Your Name</span>
+        <span className="TweetFormHeader-account">@yourname</span>
       </div>
     </div>
   );

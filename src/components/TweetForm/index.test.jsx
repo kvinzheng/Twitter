@@ -1,9 +1,10 @@
 import React from "react";
 import { shallow, configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
 import { mapStateToProps, mapDispatchToProps } from "./index";
 import { sampleProfile } from "../../helper/sample-data-test";
 import { TweetForm } from "./index.jsx";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+
 configure({ adapter: new Adapter() });
 
 const searchProfiles = jest.fn();
@@ -11,7 +12,7 @@ const searchProfiles = jest.fn();
 describe("TweetForm Component", () => {
   it("should render without any data defined", () => {
     const component = shallow(
-      <TweetForm profiles={{}} status={""} searchProfiles={searchProfiles} />
+      <TweetForm profileList={[]} status={""} searchProfiles={searchProfiles} />
     );
     expect(component).toMatchSnapshot();
   });
@@ -19,7 +20,7 @@ describe("TweetForm Component", () => {
   it("should render with props passed in", () => {
     const component = shallow(
       <TweetForm
-        profiles={sampleProfile.profile}
+        profileList={sampleProfile.profile.data["sprout"]}
         status={sampleProfile.profile.status}
         searchProfiles={searchProfiles}
       />
@@ -30,7 +31,7 @@ describe("TweetForm Component", () => {
   it("Renders with correct classes", () => {
     const component = shallow(
       <TweetForm
-        profiles={sampleProfile.profile}
+        profileList={sampleProfile.profile.data["sprout"]}
         status={sampleProfile.profile.status}
         searchProfiles={searchProfiles}
       />
@@ -41,11 +42,10 @@ describe("TweetForm Component", () => {
 
   it("mapStateToProps default data", () => {
     const state = {
-      profile: { status: "" }
-     
+      profile: { data: [], status: "" },
     };
     const expected = {
-      profiles: {status: ""},
+      profileList: [],
       status: "",
     };
     expect(mapStateToProps(state)).toEqual(expected);
@@ -54,45 +54,30 @@ describe("TweetForm Component", () => {
   it("mapStateToProps", () => {
     const state = sampleProfile;
     const expected = {
-      profiles: sampleProfile.profile,
+      profileList: sampleProfile.profile.data,
       status: "FULFILLED",
     };
     expect(mapStateToProps(state)).toEqual(expected);
   });
 
-  xit("matDispatchtoProps", () => {
+  it("matDispatchtoProps", () => {
     const dispatch = jest.fn();
     expect(mapDispatchToProps(dispatch)).toHaveProperty("searchProfiles");
   });
 
-  xit("When submit on the form", () => {
-    const component = mount(
-      <TweetForm
-        loadAllData={loadAllData}
-        setSearchTerm={setSearchTerm}
-        searchTerm={"cat"}
-      />
-    );
-    component.find(".search-form").simulate("submit", {
-      preventDefault: () => {},
-    });
-    expect(loadAllData).toHaveBeenCalled();
-  });
+  it("When type on the input in textarea", () => {
+    const event = { target: { value: "sprout social", selectionStart: 13 } };
 
-  xit("When type on the input", () => {
     const component = mount(
       <TweetForm
-        loadAllData={loadAllData}
-        setSearchTerm={setSearchTerm}
-        searchTerm={"cat"}
+        profileList={sampleProfile.profile.data["sprout"]}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
       />
     );
-    component.find("#input-bar").simulate("change", {
-      preventDefault: () => {},
-      target: {
-        value: "cat",
-      },
-    });
-    expect(loadAllData).toHaveBeenCalled();
+
+    const textArea = component.find(".TweetForm-textArea");
+    textArea.simulate("change", event);
+    //need to finish this test
   });
 });

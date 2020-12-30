@@ -52,10 +52,10 @@ const TweetFormProfileList = ({
             ) : (
               <ul className="TweetFormProfileList-network">
                 {searchTerm.length
-                  ? profileList.users.map(
+                  ? profileList.map(
                       ({ name, profile_image_url, screen_name }, index) => {
                         return (
-                          <li key={index} onClick={() => onListItemClick(name)}>
+                          <li className="TweetFormProfileList-Item" key={index} onClick={() => onListItemClick(name)}>
                             <TweetFormProfileListItem
                               profile_image_url={profile_image_url}
                               name={name}
@@ -76,7 +76,7 @@ const TweetFormProfileList = ({
 };
 
 TweetFormProfileList.propTypes = {
-  profileList: PropTypes.object,
+  profileList: PropTypes.array,
   status: PropTypes.string,
   onListItemClick: PropTypes.func,
   searchTerm: PropTypes.string,

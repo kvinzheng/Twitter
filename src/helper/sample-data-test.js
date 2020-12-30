@@ -1,4 +1,4 @@
-export const profile = {
+export const profileApiData = {
   users: [
     {
       id: 42793960,
@@ -2421,10 +2421,16 @@ export const profile = {
   },
 };
 
-
 export const sampleProfile = {
   profile: {
-    sprout: profile,
-    status: 'FULFILLED',
+    data: { sprout: profileApiData.users },
+    status: "FULFILLED",
+  },
+};
+
+export const emptySampleData = {
+  profile: {
+    data: {},
+    status: "PENDING",
   },
 };

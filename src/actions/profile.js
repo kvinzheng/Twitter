@@ -8,8 +8,11 @@ export const searchProfiles = (profile) => {
   return async (dispatch, getState, { Api }) => {
     dispatch({ type: SEARCH_PROFILE_PENDING });
     try {
-      const data = await Api.tweetSearch(profile);
-      dispatch({ type: SEARCH_PROFILE_FULFILLED, payload: {data,profile} });
+      const { users } = await Api.tweetSearch(profile);
+      dispatch({
+        type: SEARCH_PROFILE_FULFILLED,
+        payload: { data: users, profile },
+      });
     } catch (e) {
       dispatch({ type: SEARCH_PROFILE_REJECTED });
     }
