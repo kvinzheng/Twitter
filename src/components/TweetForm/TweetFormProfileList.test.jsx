@@ -6,7 +6,7 @@ import TweetFormProfileList from "./TweetFormProfileList.jsx";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 configure({ adapter: new Adapter() });
-const onListItemClick = jest.fn();
+const handleListItemClick = jest.fn();
 
 describe("TweetFormProfileList Component", () => {
   it("Should render without any data defined", () => {
@@ -15,7 +15,7 @@ describe("TweetFormProfileList Component", () => {
         profileList={[]}
         status={""}
         searchTerm={""}
-        onListItemClick={onListItemClick}
+        onListItemClick={handleListItemClick}
       />
     );
     expect(component).toMatchSnapshot();
@@ -27,7 +27,7 @@ describe("TweetFormProfileList Component", () => {
         profileList={sampleProfile.profile.data["sprout"]}
         status={sampleProfile.profile.status}
         searchTerm={"sprout"}
-        onListItemClick={onListItemClick}
+        onListItemClick={handleListItemClick}
       />
     );
     expect(component.find(".TweetFormProfileList").length).toBe(1);
@@ -41,11 +41,11 @@ describe("TweetFormProfileList Component", () => {
         profileList={sampleProfile.profile.data["sprout"]}
         status={sampleProfile.profile.status}
         searchTerm={"sprout"}
-        onListItemClick={onListItemClick}
+        onListItemClick={handleListItemClick}
       />
     );
 
-    component.find(".TweetFormProfileList-Item").at(1).simulate("click");
-    expect(onListItemClick).toHaveBeenCalled();
+    component.find(".TweetFormProfileList-Item").at(0).simulate("click");
+    expect(handleListItemClick).toHaveBeenCalled();
   });
 });

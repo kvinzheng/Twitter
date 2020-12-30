@@ -2434,3 +2434,10 @@ export const emptySampleData = {
     status: "PENDING",
   },
 };
+
+export const textAreaSampleData = {
+  outBound:
+    "outOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBound",
+  inValidCharacter: "@##",
+  validCharacter: "@sprout",
+};

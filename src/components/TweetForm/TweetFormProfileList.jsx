@@ -55,7 +55,13 @@ const TweetFormProfileList = ({
                   ? profileList.map(
                       ({ name, profile_image_url, screen_name }, index) => {
                         return (
-                          <li className="TweetFormProfileList-Item" key={index} onClick={() => onListItemClick(name)}>
+                          <li
+                            className="TweetFormProfileList-Item"
+                            key={index}
+                            onClick={() => {
+                              onListItemClick(name);
+                            }}
+                          >
                             <TweetFormProfileListItem
                               profile_image_url={profile_image_url}
                               name={name}

@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --coverage --watchAll --env=jsdom",
     "eject": "react-scripts eject",
     "server": "node twitter-screenname-server/server.js",
     "dev": "concurrently --kill-others \"npm start\" \"npm run server\""
@@ -29,7 +29,9 @@
   "proxy": "http://localhost:4000",
   "devDependencies": {
     "@testing-library/react": "^11.2.2",
+    "@testing-library/react-hooks": "^3.7.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
+    "axios-mock-adapter": "^1.19.0",
     "concurrently": "^3.5.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
