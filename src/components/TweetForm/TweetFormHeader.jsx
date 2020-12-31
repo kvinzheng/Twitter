@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { Twitter } from "react-feather";
 
 import "./TweetFormHeader.css";
 
-const TweetFormHeader = () => (
+const TweetFormHeader = memo(() => (
   <div className="TweetFormHeader">
     <img src="http://pbs.twimg.com/profile_images/1080545769034108928/CEzHCTpI_normal.jpg" />
     <div className="TweetFormHeader-detail">
@@ -16,6 +16,6 @@ const TweetFormHeader = () => (
       <span className="TweetFormHeader-account">@yourname</span>
     </div>
   </div>
-);
+));
 
 export default TweetFormHeader;
