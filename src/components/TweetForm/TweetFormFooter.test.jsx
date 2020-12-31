@@ -1,11 +1,10 @@
 import React from "react";
-import { shallow, configure, mount } from "enzyme";
-import { mapStateToProps, mapDispatchToProps } from "./index";
-import { sampleProfile } from "../../helper/sample-data-test";
+import { shallow, configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+
 import TweetFormFooter  from "./TweetFormFooter.jsx";
 import { TEXT_AREA_COUNT } from "../../const/form";
 
-import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
 

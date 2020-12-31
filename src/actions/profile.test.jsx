@@ -4,7 +4,7 @@ import { SEARCH_PROFILE_PENDING } from "../actions/type";
 // Import all seed data to test
 
 describe("searchProfiles Tests", () => {
-  it("SUCCESS: searchProfiles thunk test", () => {
+  it("SUCCESS: searchProfiles thunk test", async () => {
     const term = "sprout";
     const thunk = searchProfiles(term);
     expect(typeof thunk).toBe("function");
@@ -19,14 +19,14 @@ describe("searchProfiles Tests", () => {
     const dispatch = jest.fn();
     const getState = () => ({});
 
-    return thunk(dispatch, getState, { Api }).then(() => {
-      expect(Api.tweetSearch).toBeCalled();
-      dispatch.mockImplementationOnce(() => tweetSearch());
-      expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
-    });
+    await thunk(dispatch, getState, { Api });
+
+    expect(Api.tweetSearch).toBeCalled();
+    dispatch.mockImplementationOnce(() => tweetSearch());
+    expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
   });
 
-  it("FAILURE: searchProfiles thunk test", () => {
+  it("FAILURE: searchProfiles thunk test", async () => {
     const term = "sprout";
     const thunk = searchProfiles(term);
     expect(typeof thunk).toBe("function");
@@ -41,10 +41,10 @@ describe("searchProfiles Tests", () => {
     const dispatch = jest.fn();
     const getState = () => ({});
 
-    return thunk(dispatch, getState, { Api }).then(() => {
-      expect(Api.tweetSearch).toBeCalled();
-      dispatch.mockImplementationOnce(() => tweetSearch());
-      expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
-    });
+    await thunk(dispatch, getState, { Api });
+
+    expect(Api.tweetSearch).toBeCalled();
+    dispatch.mockImplementationOnce(() => tweetSearch());
+    expect(dispatch).toBeCalledWith({ type: SEARCH_PROFILE_PENDING });
   });
 });

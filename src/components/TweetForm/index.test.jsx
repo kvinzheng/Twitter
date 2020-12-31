@@ -1,13 +1,17 @@
 import React from "react";
-import { shallow, configure, mount } from "enzyme";
+import { shallow, configure } from "enzyme";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+
 import { mapStateToProps, mapDispatchToProps } from "./index";
+import { TweetForm } from "./index.jsx";
+import TweetFormProfileList from "./TweetFormProfileList";
+import TweetFormFooter from "./TweetFormFooter";
+
 import {
   sampleProfile,
   textAreaSampleData,
 } from "../../helper/sample-data-test";
-import { TweetForm } from "./index.jsx";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import TweetFormProfileList from "./TweetFormProfileList";
+
 configure({ adapter: new Adapter() });
 
 const searchProfiles = jest.fn();
@@ -54,7 +58,7 @@ describe("TweetForm Component", () => {
     expect(mapStateToProps(state)).toEqual(expected);
   });
 
-  it("mapStateToProps", () => {
+  it("mapStateToProps with data", () => {
     const state = sampleProfile;
     const expected = {
       profiles: sampleProfile.profile.data,
@@ -68,82 +72,8 @@ describe("TweetForm Component", () => {
     expect(mapDispatchToProps(dispatch)).toHaveProperty("searchProfiles");
   });
 
-  it("When type on the input in textarea with normal character", () => {
+  it("When type on the input in textarea with normal characters and it doesn't make api call", () => {
     const event = { target: { value: "sprout social", selectionStart: 13 } };
-
-    const component = mount(
-      <TweetForm
-        profiles={sampleProfile.profile.data}
-        status={sampleProfile.profile.status}
-        searchProfiles={searchProfiles}
-      />
-    );
-
-    const textArea = component.find(".TweetForm-textArea");
-    textArea.simulate("change", event);
-    //need to finish this test
-  });
-
-  it("When type on the input in textarea when searching successfully", () => {
-    const event = { target: { value: "@sprout", selectionStart: 13 } };
-
-    const component = mount(
-      <TweetForm
-        profiles={sampleProfile.profile.data}
-        status={sampleProfile.profile.status}
-        searchProfiles={searchProfiles}
-      />
-    );
-
-    const textArea = component.find(".TweetForm-textArea");
-    textArea.simulate("change", event);
-    //need to finish this test
-  });
-
-  it("When type on the input in textarea when searching unsuccessfully", () => {
-    const event = {
-      target: {
-        value: textAreaSampleData.inValidCharacter,
-        selectionStart: 13,
-      },
-    };
-
-    const component = mount(
-      <TweetForm
-        profiles={sampleProfile.profile.data}
-        status={sampleProfile.profile.status}
-        searchProfiles={searchProfiles}
-      />
-    );
-
-    const textArea = component.find(".TweetForm-textArea");
-    textArea.simulate("change", event);
-    //need to finish this test
-  });
-
-  it("When type on the input in textarea when searching with out of bound warning", () => {
-    const event = {
-      target: { value: textAreaSampleData.outBound, selectionStart: 13 },
-    };
-
-    const component = mount(
-      <TweetForm
-        profiles={sampleProfile.profile.data}
-        status={sampleProfile.profile.status}
-        searchProfiles={searchProfiles}
-      />
-    );
-
-    const textArea = component.find(".TweetForm-textArea");
-    textArea.simulate("change", event);
-    //need to finish this test
-  });
-
-  it("When type on the input in textarea with validateCharacter and count", () => {
-    const onChangeEvent = {
-      target: { value: textAreaSampleData.validCharacter, selectionStart: 4 },
-    };
-    const onKeyDownEvent = { key: " " };
 
     const component = shallow(
       <TweetForm
@@ -154,18 +84,117 @@ describe("TweetForm Component", () => {
     );
 
     const textArea = component.find(".TweetForm-textArea");
+    textArea.simulate("change", event);
+    const profileItem = component
+      .find(TweetFormProfileList)
+      .dive()
+      .find(".TweetFormProfileList-Item");
+    expect(profileItem.length).toBe(0);
+  });
 
-    // const setCountRemain = jest.fn();
-    // const mockUseState = jest.spyOn(React, "useState");
-    // mockUseState.mockImplementation((size) => [size, setCountRemain]);
+  it("When type on the input in textarea with validateCharacter and count", () => {
+    const onChangeEvent = {
+      target: { value: "@sprout", selectionStart: 4 },
+    };
+
+    const component = shallow(
+      <TweetForm
+        profiles={sampleProfile.profile.data}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
+      />
+    );
+
+    const textArea = component.find(".TweetForm-textArea");
     textArea.simulate("change", onChangeEvent);
-    textArea.simulate("keydown", onKeyDownEvent);
 
     const profileItem = component
-      .find(".TweetForm-container-list")
+      .find(TweetFormProfileList)
       .dive()
       .find(".TweetFormProfileList-Item")
       .at(0);
     profileItem.simulate("click");
+  });
+
+  it("When type on the input in textarea with validateCharacter but as a new data", () => {
+    const onChangeEvent = {
+      target: { value: "@tesla", selectionStart: 4 },
+    };
+
+    const component = shallow(
+      <TweetForm
+        profiles={sampleProfile.profile.data}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
+      />
+    );
+
+    const textArea = component.find(".TweetForm-textArea");
+    textArea.simulate("change", onChangeEvent);
+
+    const profileItem = component
+      .find(TweetFormProfileList)
+      .dive()
+      .find(".TweetFormProfileList-Item")
+      .at(0);
+    expect(profileItem.length).toBe(0);
+  });
+
+  it("When type on the input in textarea outbound data", () => {
+    const onChangeEvent = {
+      target: { value: textAreaSampleData.outBound, selectionStart: 4 },
+    };
+
+    const component = shallow(
+      <TweetForm
+        profiles={sampleProfile.profile.data}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
+      />
+    );
+    const textArea = component.find(".TweetForm-textArea");
+    textArea.simulate("change", onChangeEvent);
+
+    const outBoundWarning = component
+      .find(TweetFormFooter)
+      .dive()
+      .find(".TweetFormFooter-warning");
+    expect(outBoundWarning.length).toBe(1);
+  });
+
+  it("When type on the input in textarea invalid data", () => {
+    const onChangeEvent = {
+      target: { value: textAreaSampleData.inValidCharacter, selectionStart: 2 },
+    };
+
+    const component = shallow(
+      <TweetForm
+        profiles={sampleProfile.profile.data}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
+      />
+    );
+    const textArea = component.find(".TweetForm-textArea");
+    textArea.simulate("change", onChangeEvent);
+
+    const outBoundWarning = component
+      .find(TweetFormFooter)
+      .dive()
+      .find(".TweetFormFooter-warning");
+    expect(outBoundWarning.length).toBe(1);
+  });
+
+  it("When type on key down", () => {
+    const component = shallow(
+      <TweetForm
+        profiles={sampleProfile.profile.data}
+        status={sampleProfile.profile.status}
+        searchProfiles={searchProfiles}
+      />
+    );
+
+    const textArea = component.find(".TweetForm-textArea");
+    const onKeyDownEvent = { key: " " };
+    textArea.simulate("keydown", onKeyDownEvent);
   });
 });

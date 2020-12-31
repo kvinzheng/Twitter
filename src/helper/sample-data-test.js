@@ -2437,7 +2437,7 @@ export const emptySampleData = {
 
 export const textAreaSampleData = {
   outBound:
-    "outOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBound",
+    "outOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOftOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBoundoutOfBound",
   inValidCharacter: "@##",
   validCharacter: "@sprout",
 };

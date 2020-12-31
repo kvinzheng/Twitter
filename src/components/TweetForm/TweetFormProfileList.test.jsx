@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow, configure, mount } from "enzyme";
-import { sampleProfile } from "../../helper/sample-data-test";
-
-import TweetFormProfileList from "./TweetFormProfileList.jsx";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+
+import { sampleProfile } from "../../helper/sample-data-test";
+import TweetFormProfileList from "./TweetFormProfileList.jsx";
 
 configure({ adapter: new Adapter() });
 const handleListItemClick = jest.fn();

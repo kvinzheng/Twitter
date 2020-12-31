@@ -16,14 +16,12 @@ describe("profile data", () => {
 
   it("returns the exact state given an unkown type (i.e., does not modify the state)", () => {
     const prevState = { ...profileState };
-
     const nextState = profile(prevState, { type: "UNKNOWN" });
     expect(nextState).toBe(prevState);
   });
 
   it("FULFILLED: return a new state with the specified profile data on it- search with the word sprout", () => {
     const incomingApiData = profileApiData.users;
-
     const prevState = { ...profileState };
     const nextState = profile(prevState, {
       type: SEARCH_PROFILE_FULFILLED,
@@ -39,7 +37,6 @@ describe("profile data", () => {
 
   it("REJECTED: return a new state with the specified profile data on it- search with the word sprout", () => {
     const incomingApiData = profileApiData.users;
-
     const prevState = { ...profileState };
     const nextState = profile(prevState, {
       type: SEARCH_PROFILE_REJECTED,
@@ -52,7 +49,6 @@ describe("profile data", () => {
 
   it("PENDING: return a new state with the specified profile data on it- search with the word sprout", () => {
     const prevState = { ...profileState };
-
     const nextState = profile(prevState, {
       type: SEARCH_PROFILE_PENDING,
       payload: undefined,

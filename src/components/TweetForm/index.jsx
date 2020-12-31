@@ -25,7 +25,6 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
 
   const textRef = useRef(null);
   const debouncedSearchTerm = useDebounce(searchTerm, FETCH_DELAY_TIME);
-
   useEffect(() => {
     const existed = profiles[searchTerm.toLowerCase()];
     if (debouncedSearchTerm && !existed && searchTerm.length) {
@@ -34,7 +33,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
     }
   }, [debouncedSearchTerm]);
 
-  const validateTextArea = (newTweet, cursorPosition) => {
+  const validateTextArea = (newTweet, cursorPosition, countRemaining) => {
     const { startIndex, currentWord } = findCurrentWord(
       cursorPosition,
       newTweet
@@ -49,12 +48,14 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
       : "";
     const outBoundWarning = "Out of boundary";
 
-    if (countRemain < 0) {
+    if (countRemaining < 0) {
       setError(outBoundWarning);
+    } else {
+      if (error.length) {
+        setError("");
+      }
     }
-    if (error.length && countRemain >= 0) {
-      setError("");
-    }
+
     if (currentWord.includes("@")) {
       setError(chatacterWarning);
       /* if word is more than 2 */
@@ -88,9 +89,9 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
     const cursorPosition = e.target.selectionStart;
 
     setTweet(newTweet);
-    setCountRemain(TEXT_AREA_COUNT - newTweet.length);
-
-    validateTextArea(newTweet, cursorPosition);
+    const remainCount = TEXT_AREA_COUNT - newTweet.length;
+    setCountRemain(remainCount);
+    validateTextArea(newTweet, cursorPosition, remainCount);
   };
 
   const handleOnKeyDown = async (e) => {
@@ -100,7 +101,6 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
   };
 
   const focusStyle = outLine ? "focus-style" : "";
-
   return (
     <div className="TweetForm">
       <div className={`TweetForm-container ${focusStyle}`}>
@@ -116,7 +116,10 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
           onBlur={() => setOutline(false)}
         ></textarea>
 
-        <TweetFormFooter error={error} countRemain={countRemain} />
+        <TweetFormFooter
+          error={error}
+          countRemain={countRemain}
+        />
         <TweetFormProfileList
           className="TweetForm-container-list"
           onListItemClick={handleListItemClick}
