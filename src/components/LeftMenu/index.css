@@ -2,6 +2,7 @@
   display: inline-block;
   width: 20%;
   vertical-align: top;
+  min-width: 200px;
 }
 
 .LeftMenu-Nav {
@@ -52,7 +53,7 @@
   border-radius: 50px;
   color: white;
   background-color: rgba(29, 161, 242, 1);
-  box-shadow:rgba(0, 0, 0, 0.08) 0px 8px 28px;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 8px 28px;
   display: flex;
   justify-content: center;
   align-items: center;

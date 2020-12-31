@@ -5,10 +5,10 @@ export const findCurrentWord = (cursorPosition, newTweet) => {
 
   /* 1. in the middle of a sentence */
   /* 2. at the end of a sentence */
-  const nextSpaceInde = newTweet.slice(startIndex).match(/\s/);
+  const nextSpaceIndex = newTweet.slice(startIndex).match(/\s/);
 
-  const endIndex = nextSpaceInde
-    ? startIndex + nextSpaceInde.index
+  const endIndex = nextSpaceIndex
+    ? startIndex + nextSpaceIndex.index
     : newTweet.length;
 
   const currentWord = newTweet.slice(startIndex, endIndex);

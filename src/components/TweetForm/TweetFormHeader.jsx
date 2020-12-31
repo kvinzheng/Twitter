@@ -5,7 +5,7 @@ import "./TweetFormHeader.css";
 
 const TweetFormHeader = () => (
   <div className="TweetFormHeader">
-    <img src="https://pbs.twimg.com/profile_images/1186398821560897536/1Vp8_at4_normal.jpg" />
+    <img src="http://pbs.twimg.com/profile_images/1080545769034108928/CEzHCTpI_normal.jpg" />
     <div className="TweetFormHeader-detail">
       <Twitter
         size="20"

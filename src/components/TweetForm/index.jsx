@@ -38,33 +38,37 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
       cursorPosition,
       newTweet
     );
-
     const index = currentWord.lastIndexOf("@");
     const searchTerm = currentWord.slice(index + 1);
     const firstTwoCharacters = searchTerm.slice(0, 2);
-    const wordInValid = /[^0-9a-zA-Z]/.test(firstTwoCharacters);
-    const chatacterWarning = wordInValid
-      ? "please editing an @ followed by 2 alphanumeric characters (a-z, 0-9)"
-      : "";
+    const wordInValid = index >=0 && /[^0-9a-zA-Z]/.test(firstTwoCharacters);
+
+    const chatacterWarning =
+      "please editing an @ followed by 2 alphanumeric characters (a-z, 0-9)";
     const outBoundWarning = "Out of boundary";
+
+    if (wordInValid) {
+      setError(chatacterWarning);
+    } else {
+      if (error.length && error === chatacterWarning) setError("");
+    }
 
     if (countRemaining < 0) {
       setError(outBoundWarning);
     } else {
-      if (error.length) {
-        setError("");
-      }
+      if (error.length && error === outBoundWarning) setError("");
     }
 
-    if (currentWord.includes("@")) {
-      setError(chatacterWarning);
+    if (
+      currentWord.includes("@") &&
+      searchTerm.length >= 2 &&
+      !error.length &&
+      !wordInValid &&
+      countRemaining >= 0
+    ) {
       /* if word is more than 2 */
-      if (searchTerm.length >= 2) {
-        setStartIndex(startIndex);
-        setSearchTerm(searchTerm.toLowerCase());
-      } else {
-        if (searchTerm.length) setSearchTerm("");
-      }
+      setStartIndex(startIndex);
+      setSearchTerm(searchTerm.toLowerCase());
     } else {
       if (searchTerm.length) setSearchTerm("");
     }
@@ -96,7 +100,7 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
   };
 
   const handleOnKeyDown = async (e) => {
-    if (profiles[searchTerm] && e.key === " ") {
+    if (e.key === " ") {
       setSearchTerm("");
     }
   };
@@ -119,7 +123,6 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
 
         <TweetFormFooter error={error} countRemain={countRemain} />
         <TweetFormProfileList
-          className="TweetForm-container-list"
           onListItemClick={handleListItemClick}
           onFocusTextArea={handleFocusTextArea}
           profileList={profiles[searchTerm]}

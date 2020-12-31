@@ -35,7 +35,7 @@ describe("TweetFormFooter Component", () => {
         status={TEXT_AREA_COUNT}
       />
     );
-    expect(component.find(".TweetFormFooter-options").length).toBe(1);
+    expect(component.find(".TweetFormFooter").length).toBe(1);
     expect(component.find(".TweetFormFooter-warning").length).toBe(1);
     expect(component.find(".TweetFormFooter-item").length).toBe(3);
   });

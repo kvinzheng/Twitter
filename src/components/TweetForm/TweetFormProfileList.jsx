@@ -7,7 +7,7 @@ import "./TweetFormProfileList.css";
 
 const TweetFormProfileListItem = ({ profile_image_url, name, screen_name }) => {
   return (
-    <div className="TweetFormProfileList-item" role="none">
+    <div className="TweetFormProfileListItem" role="none">
       <img
         className="TweetFormProfileList-avatar"
         src={profile_image_url}
@@ -60,11 +60,7 @@ const TweetFormProfileList = ({
                   ? profileList.map(
                       ({ name, profile_image_url, screen_name }, index) => {
                         return (
-                          <li
-                            className="TweetFormProfileList-Item"
-                            role={"listitem"}
-                            key={index}
-                          >
+                          <li role={"listitem"} key={index}>
                             <a
                               className="TweetFormProfileList-Item-Link"
                               href="#"
@@ -100,7 +96,7 @@ TweetFormProfileList.propTypes = {
   status: PropTypes.string,
   onListItemClick: PropTypes.func,
   searchTerm: PropTypes.string,
-  onFocusTextArea: PropTypes.func
+  onFocusTextArea: PropTypes.func,
 };
 
 TweetFormProfileListItem.propTypes = {

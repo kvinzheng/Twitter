@@ -1,4 +1,4 @@
-.TweetFormFooter-options {
+.TweetFormFooter {
   justify-content: space-between;
   flex-wrap: wrap;
   position: relative;
@@ -8,6 +8,7 @@
   color: red;
   position: absolute;
   right: 5px;
+  font-size: 12px;
 }
 
 .TweetFormFooter-item {

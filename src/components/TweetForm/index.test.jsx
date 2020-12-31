@@ -113,7 +113,6 @@ describe("TweetForm Component", () => {
       .dive()
       .find(".TweetFormProfileList-Item-Link")
       .at(0);
-      console.log('profileItem',profileItem)
     profileItem.simulate("click");
   });
 
