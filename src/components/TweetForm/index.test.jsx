@@ -113,7 +113,14 @@ describe("TweetForm Component", () => {
       .dive()
       .find(".TweetFormProfileList-Item-Link")
       .at(0);
+    expect(profileItem.length).toBe(1);
     profileItem.simulate("click");
+
+    const profileList = component
+      .find(TweetFormProfileList)
+      .dive()
+      .find("TweetFormProfileList");
+    expect(profileList.length).toBe(0);
   });
 
   it("When type on the input in textarea with validateCharacter but as a new data", () => {
