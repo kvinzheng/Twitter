@@ -11,10 +11,14 @@ const TweetFormFooter = ({ error, countRemain }) => (
     ) : null}
 
     <div className="TweetFormFooter-item">
-      <Target size="20" />
+      <a href="#" aria-label="target icon">
+        <Target size="20" />
+      </a>
     </div>
     <div className="TweetFormFooter-item">
-      <Camera size="20" />
+      <a href="#" aria-label="camera icon">
+        <Camera size="20" />
+      </a>
     </div>
     <div className="TweetFormFooter-item TweetFormFooter-remain-count">
       {countRemain}

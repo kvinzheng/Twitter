@@ -7,6 +7,7 @@ import TweetFormProfileList from "./TweetFormProfileList.jsx";
 
 configure({ adapter: new Adapter() });
 const handleListItemClick = jest.fn();
+const handleFocusTextArea = jest.fn();
 
 describe("TweetFormProfileList Component", () => {
   it("Should render without any data defined", () => {
@@ -16,6 +17,7 @@ describe("TweetFormProfileList Component", () => {
         status={""}
         searchTerm={""}
         onListItemClick={handleListItemClick}
+        onFocusTextArea={handleFocusTextArea}
       />
     );
     expect(component).toMatchSnapshot();
@@ -28,6 +30,7 @@ describe("TweetFormProfileList Component", () => {
         status={sampleProfile.profile.status}
         searchTerm={"sprout"}
         onListItemClick={handleListItemClick}
+        onFocusTextArea={handleFocusTextArea}
       />
     );
     expect(component.find(".TweetFormProfileList").length).toBe(1);
@@ -42,10 +45,11 @@ describe("TweetFormProfileList Component", () => {
         status={sampleProfile.profile.status}
         searchTerm={"sprout"}
         onListItemClick={handleListItemClick}
+        onFocusTextArea={handleFocusTextArea}
       />
     );
 
-    component.find(".TweetFormProfileList-Item").at(0).simulate("click");
+    component.find(".TweetFormProfileList-Item-Link").at(0).simulate("click");
     expect(handleListItemClick).toHaveBeenCalled();
   });
 });

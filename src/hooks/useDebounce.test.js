@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 
 import useDebounce from "./useDebounce";
-import { FETCH_DELAY_TIME } from "../../const/form";
+import { FETCH_DELAY_TIME } from "../const/form";
 
 
 jest.useFakeTimers();

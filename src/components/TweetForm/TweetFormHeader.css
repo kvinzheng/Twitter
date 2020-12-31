@@ -1,4 +1,4 @@
-.TweetFormHeader{
+.TweetFormHeader {
   display: flex;
   width: 100%;
   min-height: 45px;
@@ -6,12 +6,17 @@
   overflow-y: auto;
   border: solid #dee1e1;
   border-width: 0 0 1px;
+  background-color: #d3d3d3;
   cursor: pointer;
 }
 .TweetFormHeader-detail {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.TweetFormHeader-twitter-logo {
+  color: rgb(29, 161, 242);
+  margin: 6px 9px 6px 11px;
 }
 .TweetFormHeader-name {
   margin: 0px 4px 0px 0px;

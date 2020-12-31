@@ -7,7 +7,7 @@ import "./TweetFormProfileList.css";
 
 const TweetFormProfileListItem = ({ profile_image_url, name, screen_name }) => {
   return (
-    <div className="TweetFormProfileList-item">
+    <div className="TweetFormProfileList-item" role="none">
       <img
         className="TweetFormProfileList-avatar"
         src={profile_image_url}
@@ -33,6 +33,7 @@ const TweetFormProfileList = ({
   status,
   onListItemClick,
   searchTerm,
+  onFocusTextArea,
 }) => {
   const loading = status === "PENDING";
   return (
@@ -50,23 +51,36 @@ const TweetFormProfileList = ({
                 />
               </div>
             ) : (
-              <ul className="TweetFormProfileList-network">
+              <ul
+                className="TweetFormProfileList-network"
+                aria-hidden="true"
+                role="none"
+              >
                 {searchTerm.length
                   ? profileList.map(
                       ({ name, profile_image_url, screen_name }, index) => {
                         return (
                           <li
                             className="TweetFormProfileList-Item"
+                            role={"listitem"}
                             key={index}
-                            onClick={() => {
-                              onListItemClick(name);
-                            }}
                           >
-                            <TweetFormProfileListItem
-                              profile_image_url={profile_image_url}
-                              name={name}
-                              screen_name={screen_name}
-                            />
+                            <a
+                              className="TweetFormProfileList-Item-Link"
+                              href="#"
+                              role="text"
+                              onClick={() => {
+                                onListItemClick(name);
+                                onFocusTextArea();
+                              }}
+                              aria-label={name}
+                            >
+                              <TweetFormProfileListItem
+                                profile_image_url={profile_image_url}
+                                name={name}
+                                screen_name={screen_name}
+                              />
+                            </a>
                           </li>
                         );
                       }
@@ -86,6 +100,7 @@ TweetFormProfileList.propTypes = {
   status: PropTypes.string,
   onListItemClick: PropTypes.func,
   searchTerm: PropTypes.string,
+  onFocusTextArea: PropTypes.func
 };
 
 TweetFormProfileListItem.propTypes = {

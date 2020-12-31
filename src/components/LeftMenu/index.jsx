@@ -15,7 +15,12 @@ const LeftMenu = () => {
   return (
     <div className="LeftMenu">
       <div className="LeftMenu-Nav">
-        <a className="LeftMenu_Nav-Link" href="#">
+        <a
+          className="LeftMenu_Nav-Link"
+          aria-label="Twitter icon"
+          href="#"
+          aria-hidden="true"
+        >
           <div className="LeftMenu-Link-Wrapper">
             <Twitter
               size="30"

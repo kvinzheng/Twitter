@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import useDebounce from "../hook/useDebounce";
+import useDebounce from "../../hooks/useDebounce";
 import { searchProfiles } from "../../actions/profile";
 import { findCurrentWord } from "../../helper/formHelper";
 
@@ -70,15 +70,16 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
     }
   };
 
+  const handleFocusTextArea = () => {
+    if (textRef.current) textRef.current.focus();
+  };
   const handleListItemClick = (profile) => {
     const left = tweet.slice(0, startIndex);
     const right = tweet.slice(startIndex + searchTerm.length + 1, tweet.length);
     const newTweet = `${left}@${profile.replace(/ /g, "")}${right}`;
 
     const focusWord = textRef.current;
-    if (focusWord) {
-      focusWord.value = newTweet;
-    }
+    if (focusWord) focusWord.value = newTweet;
 
     setSearchTerm("");
     setTweet(newTweet);
@@ -116,13 +117,11 @@ export const TweetForm = ({ profiles, searchProfiles, status }) => {
           onBlur={() => setOutline(false)}
         ></textarea>
 
-        <TweetFormFooter
-          error={error}
-          countRemain={countRemain}
-        />
+        <TweetFormFooter error={error} countRemain={countRemain} />
         <TweetFormProfileList
           className="TweetForm-container-list"
           onListItemClick={handleListItemClick}
+          onFocusTextArea={handleFocusTextArea}
           profileList={profiles[searchTerm]}
           searchTerm={searchTerm}
           status={status}

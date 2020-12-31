@@ -1,6 +1,6 @@
 import { searchProfiles } from "./profile";
 import { profileApiData } from "../helper/sample-data-test";
-import { SEARCH_PROFILE_PENDING } from "../actions/type";
+import { SEARCH_PROFILE_PENDING } from "./type";
 // Import all seed data to test
 
 describe("searchProfiles Tests", () => {

@@ -88,7 +88,7 @@ describe("TweetForm Component", () => {
     const profileItem = component
       .find(TweetFormProfileList)
       .dive()
-      .find(".TweetFormProfileList-Item");
+      .find(".TweetFormProfileList-Item-Link");
     expect(profileItem.length).toBe(0);
   });
 
@@ -111,8 +111,9 @@ describe("TweetForm Component", () => {
     const profileItem = component
       .find(TweetFormProfileList)
       .dive()
-      .find(".TweetFormProfileList-Item")
+      .find(".TweetFormProfileList-Item-Link")
       .at(0);
+      console.log('profileItem',profileItem)
     profileItem.simulate("click");
   });
 
@@ -135,7 +136,7 @@ describe("TweetForm Component", () => {
     const profileItem = component
       .find(TweetFormProfileList)
       .dive()
-      .find(".TweetFormProfileList-Item")
+      .find(".TweetFormProfileList-Item-Link")
       .at(0);
     expect(profileItem.length).toBe(0);
   });

@@ -30,7 +30,7 @@
   list-style: none;
 }
 
-.TweetFormProfileList-load{
+.TweetFormProfileList-load {
   text-align: center;
   color: rgba(29, 161, 242, 1);
 }
@@ -71,8 +71,13 @@
   align-items: center;
 }
 
-
-
+.TweetForm-profile-twitter-logo {
+  color: rgb(29, 161, 242);
+  margin: 6px 9px 6px 11px;
+}
 .TweetFormProfileList-network {
   list-style: none;
+}
+.TweetFormProfileList-Item-Link {
+  text-decoration: none;
 }
