@@ -7,7 +7,7 @@
 
 
 ### Folder Structure ###
-<img src="/images/test-coverage.png" width="300">
+<img src="/images/test-coverage.png" width="800">
 
 
 ## Environment Dependencies:
