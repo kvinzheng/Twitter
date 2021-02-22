@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const PORT = 4000;
-
+//In Production Code, the consumer_key, consumer_secret,access_token_key and access_token_secret would not be shown for security issue.
+//Since this is a simple twitter clone, I am displaying here for convinence purpose for the readder
 const client = new Twitter({
 	consumer_key: 'Rc4rjFT7IgOVuH6g74znYVEtd',
 	consumer_secret: 'fW0uPs0zLL3fwVkPdwYPx09xajA1p6InoLB50H2MiA1JGOWADn',

@@ -1,6 +1,6 @@
 # Twitter 
 
-# This app allows the user to fetch Twitter usernames and make tweets(WIP)
+### Description: This app allows the user to fetch Twitter usernames and make tweets(WIP) ###
 
 ## App View ###
 <img src="/images/ada-compliance.png" width="800">
