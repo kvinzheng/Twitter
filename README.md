@@ -6,9 +6,10 @@
 <img src="/images/ada-compliance.png" width="800">
 
 
-### Folder Structure ###
+### Test Coverage ###
 <img src="/images/test-coverage.png" width="600">
 
+- run `npm run test`
 
 ## Environment Dependencies:
 
