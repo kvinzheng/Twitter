@@ -1,4 +1,14 @@
-# Sprout Social Applicant Homework
+# Twitter 
+
+# This app allows the user to fetch Twitter usernames and make tweets(WIP)
+
+## App View ###
+<img src="/images/ada-compliance.png" width="800">
+
+
+### Folder Structure ###
+<img src="/images/test-coverage.png" width="300">
+
 
 ## Environment Dependencies:
 

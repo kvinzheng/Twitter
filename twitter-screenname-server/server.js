@@ -5,10 +5,10 @@ const cors = require('cors');
 const PORT = 4000;
 
 const client = new Twitter({
-	consumer_key: 'fx95oKhMHYgytSBmiAqQ',
-	consumer_secret: '0zfaijLMWMYTwVosdqFTL3k58JhRjZNxd2q0i9cltls',
-	access_token_key: '2305278770-GGw8dQQg3o5Vqfx9xHpUgJ0CDUe3BoNmUNeWZBg',
-	access_token_secret: 'iEzxeJjEPnyODVcoDYt5MVvrg90Jx2TOetGdNeol6PeYp',
+	consumer_key: 'Rc4rjFT7IgOVuH6g74znYVEtd',
+	consumer_secret: 'fW0uPs0zLL3fwVkPdwYPx09xajA1p6InoLB50H2MiA1JGOWADn',
+	access_token_key: '842866092888416256-VLBW5odiBC3U2pCEVwJ8RtRDUclYWjt',
+	access_token_secret: 'LkIENI6ryVU9dcICxrUNjb20uPQcd1oZhDFkfEtqFWrs7',
 });
 
 // CORS support
